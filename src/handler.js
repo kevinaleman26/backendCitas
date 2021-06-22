@@ -52,8 +52,8 @@ module.exports.listarCitas = (event, context, callback) => {
 
 
     let citas = orderManager.getAllCitas()
-    console.log(citas.Items);
-    if(citas.Items.length > 0){
+
+    if(citas.length > 0){
         sendResponse(200, `tenemos Lista`, callback);
     }else {
         sendResponse(500, 'Hubo un error al procesar el pedido', callback);
