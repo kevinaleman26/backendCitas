@@ -68,7 +68,7 @@ module.exports.getCita = id => {
 
 module.exports.getAllCitas = () => {
 
-    return dynamo
+    dynamo
     .scan({
         TableName: process.env.DYNAMOTABLE,
     })
