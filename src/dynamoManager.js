@@ -74,9 +74,11 @@ module.exports.getAllCitas = () => {
     })
     .promise()
     .then(item => {
+        console.log('data')
         return item.Items;
     })
     .catch(err => {
+        console.log('no data')
         return err;
     })
 
