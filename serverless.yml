@@ -1,0 +1,80 @@
+service: pedirPizzas
+
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  timeout: 30
+  memorySize: 512
+  lambdaHashingVersion: 20201221
+  apiName: apiGateway-${self:provider.stage}
+  region: us-east-1
+  environment:
+    REGION: ${self:provider.region}
+    ENVIROMENT: ${self:provider.stage}
+    DYNAMOTABLE: ${self:provider.stage}-CompletedOrderTable
+  
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "*"
+
+functions:
+  hacerPedido:
+    handler: src/handler.hacerPedido
+    events:
+      - http: 
+          method: POST 
+          path: /hacerPedido
+  prepararPedido:
+    handler: src/handler.prepararPedido
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - PendingOrdersQueue
+              - Arn
+          batchSize: 1
+  enviarPedido:
+    handler: src/handler.enviarPedido
+    events:
+      - stream:
+          type: dynamodb
+          batchSize: 1
+          startingPosition: LATEST
+          arn:
+            Fn::GetAtt:
+              - CompletedOrdersTable
+              - StreamArn
+  listarPedido:
+    handler: src/handler.listaPedidos
+    events:
+      - http: 
+          method: GET 
+          path: /listarPedidos/{orderId}
+
+resources:
+  Resources:
+    CompletedOrdersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.DYNAMOTABLE}
+        AttributeDefinitions:
+          - AttributeName: orderId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: orderId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: NEW_IMAGE
