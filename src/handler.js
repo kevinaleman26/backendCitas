@@ -51,7 +51,7 @@ module.exports.listarCita = (event, context, callback) => {
 module.exports.listarCitas = (event, context, callback) => {
 
 
-    orderManager.getAllCitas(id)
+    orderManager.getAllCitas()
     .then(obj => {
         sendResponse(200, `tenemos Lista`, callback);
     })
