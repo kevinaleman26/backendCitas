@@ -51,14 +51,13 @@ module.exports.listarCita = (event, context, callback) => {
 module.exports.listarCitas = (event, context, callback) => {
 
 
-    let citas = orderManager.getAllCitas()
-    console.log(citas)
-
-    if(citas.length > 0){
-        sendResponse(200, `tenemos Lista`, callback);
-    }else {
+    orderManager.getAllCitas()
+    .then(obj => {
+        sendResponse(200, obj, callback);
+    })
+    .catch(error => {
         sendResponse(500, 'Hubo un error al procesar el pedido', callback);
-    };
+    });
 
   }
 
