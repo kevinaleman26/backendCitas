@@ -73,7 +73,7 @@ module.exports.getAllCitas = () => {
         TableName: process.env.DYNAMOTABLE,
     })
     .promise()
-    .then(data => {return data})
-    .catch(err => {return err})
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
 
 };
