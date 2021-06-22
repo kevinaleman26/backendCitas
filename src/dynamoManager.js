@@ -18,16 +18,16 @@ module.exports.saveCompletedOrder = order => {
 
 };
 
-module.exports.deliverOrder = orderId => {
+module.exports.deliverOrder = id => {
 
     console.log('Enviar una orden fue llamada');
 
     const params = {
         TableName: process.env.COMPLETED_ORDER_TABLE,
         Key: {
-            orderId
+            id
         },
-        ConditionsExpression: 'attribute_exists(orderId)',
+        ConditionsExpression: 'attribute_exists(id)',
         UpdateExpression: 'set delivery_status = :v',
         ExpressionAttributeValues: {
             ':v' : 'DELIVERED'

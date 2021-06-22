@@ -39,7 +39,7 @@ functions:
     events:
       - http: 
           method: GET 
-          path: /listarPedidos/{orderId}
+          path: /cita/{id}
 
 resources:
   Resources:
