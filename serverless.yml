@@ -35,7 +35,7 @@ functions:
           method: POST 
           path: /hacerPedido
   listarCita:
-    handler: src/handler.listaCita
+    handler: src/handler.listarCita
     events:
       - http: 
           method: GET 
