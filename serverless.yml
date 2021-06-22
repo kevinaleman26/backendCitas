@@ -1,4 +1,4 @@
-service: pedirPizzas
+service: service-core-citas
 
 frameworkVersion: '2'
 
