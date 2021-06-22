@@ -37,8 +37,8 @@ module.exports.listaPedidos = (event, context, callback) => {
   const id = event.pathParameters && event.pathParameters.id;
 	if (id !== null) {
 		orderManager.getOrders(id)
-        .then(id => {
-            sendResponse(200, `El estado de la orden: ${id}`, callback);
+        .then(obj => {
+            sendResponse(200, `El estado de la orden: ${obj.id}`, callback);
         })
         .catch(error => {
             sendResponse(500, 'Hubo un error al procesar el pedido', callback);
