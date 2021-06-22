@@ -79,7 +79,7 @@ module.exports.getAllCitas = () => {
         } else {
             console.log("Query succeeded.");
             data.Items.forEach(function(item) {
-                console.log(" -", item.year + ": " + item.title);
+                console.log(item.id);
             });
         }
     });
