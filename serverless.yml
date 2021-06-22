@@ -34,26 +34,6 @@ functions:
       - http: 
           method: POST 
           path: /hacerPedido
-  prepararPedido:
-    handler: src/handler.prepararPedido
-    events:
-      - sqs:
-          arn:
-            Fn::GetAtt:
-              - PendingOrdersQueue
-              - Arn
-          batchSize: 1
-  enviarPedido:
-    handler: src/handler.enviarPedido
-    events:
-      - stream:
-          type: dynamodb
-          batchSize: 1
-          startingPosition: LATEST
-          arn:
-            Fn::GetAtt:
-              - CompletedOrdersTable
-              - StreamArn
   listarPedido:
     handler: src/handler.listaPedidos
     events:
