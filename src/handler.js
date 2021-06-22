@@ -37,7 +37,7 @@ module.exports.listaPedidos = (event, context, callback) => {
   const id = event.pathParameters && event.pathParameters.id;
 	if (id !== null) {
 		orderManager.getOrders(id)
-        .then(order => {
+        .then(id => {
             sendResponse(200, `El estado de la orden: ${id} es ${order.delivery_status}`, callback);
         })
         .catch(error => {
