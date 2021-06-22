@@ -22,7 +22,7 @@ module.exports.hacerPedido = (event, context, callback) => {
   }
 
   orderManager.saveCompletedOrder(pedido)
-  .then(resp => sendResponse(200, `Se inserto correctamente: ${resp}`, callback))
+  .then(resp => sendResponse(200, `Se inserto correctamente: ${resp.id}`, callback))
   .catch(err => sendResponse(500, `Hubo un error al procesar el pedido. ${err}`, callback));
 
 };
