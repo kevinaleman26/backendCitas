@@ -48,10 +48,10 @@ resources:
       Properties:
         TableName: ${self:provider.environment.DYNAMOTABLE}
         AttributeDefinitions:
-          - AttributeName: orderId
+          - AttributeName: id
             AttributeType: S
         KeySchema:
-          - AttributeName: orderId
+          - AttributeName: id
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
