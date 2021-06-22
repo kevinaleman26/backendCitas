@@ -72,15 +72,17 @@ module.exports.getAllCitas = () => {
         TableName : process.env.DYNAMOTABLE
     };
 
-	return dynamoquery(params, function(err, data) {
+	return dynamo.query(params, function(err, data) {
 
         if (err) {
             console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+            return '';
         } else {
             console.log("Query succeeded.");
             data.Items.forEach(function(item) {
                 console.log(item.id);
             });
+            return data;
         }
     });
 
