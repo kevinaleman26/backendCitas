@@ -75,7 +75,6 @@ module.exports.getAllCitas = () => {
     .promise()
     .then(item => {
         console.log('data')
-        console.log(item.Items)
         return item.Items;
     })
     .catch(err => {

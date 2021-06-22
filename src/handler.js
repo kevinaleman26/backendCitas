@@ -51,7 +51,7 @@ module.exports.listarCita = (event, context, callback) => {
 module.exports.listarCitas = (event, context, callback) => {
 
 
-    let citas = orderManager.getAllCitas()
+    let citas = JSON.parse(orderManager.getAllCitas())
 
     if(citas.length > 0){
         sendResponse(200, `tenemos Lista`, callback);
