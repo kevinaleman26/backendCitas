@@ -54,6 +54,9 @@ module.exports.getOrders = id => {
 		}
 	};
 
+    console.log(params);
+
+
 	return dynamo
 		.get(params)
 		.promise()
