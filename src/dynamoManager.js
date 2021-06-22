@@ -68,17 +68,12 @@ module.exports.getCita = id => {
 
 module.exports.getAllCitas = () => {
 
-    var params = {
-        TableName : process.env.DYNAMOTABLE
-    };
-
-	return dynamo.query(params, function(err, data) {
-
-        if (err) {
-            console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-            return [];
-        } 
-        return data;
-    });
+    return dynamo
+    .scan({
+        TableName: process.env.DYNAMOTABLE,
+    })
+    .promise()
+    .then(data => {return data})
+    .catch(err => {return err})
 
 };
