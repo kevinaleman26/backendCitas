@@ -34,12 +34,18 @@ functions:
       - http: 
           method: POST 
           path: /hacerPedido
-  listarPedido:
-    handler: src/handler.listaPedidos
+  listarCita:
+    handler: src/handler.listaCita
     events:
       - http: 
           method: GET 
           path: /cita/{id}
+  listarCitas:
+    handler: src/handler.listarCitas
+    events:
+      - http: 
+          method: GET 
+          path: /cita
 
 resources:
   Resources:

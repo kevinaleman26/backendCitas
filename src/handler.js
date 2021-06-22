@@ -32,13 +32,13 @@ module.exports.hacerPedido = (event, context, callback) => {
   listaPedidos
 */
 
-module.exports.listaPedidos = (event, context, callback) => {
+module.exports.listarCita = (event, context, callback) => {
 
   const id = event.pathParameters && event.pathParameters.id;
 	if (id !== null) {
-		orderManager.getOrders(id)
+		orderManager.getCita(id)
         .then(obj => {
-            sendResponse(200, `El estado de la orden: ${obj.id}`, callback);
+            sendResponse(200, `El estado de la cita: ${obj.id}`, callback);
         })
         .catch(error => {
             sendResponse(500, 'Hubo un error al procesar el pedido', callback);
@@ -47,6 +47,19 @@ module.exports.listaPedidos = (event, context, callback) => {
 		sendResponse(400, 'Falta el id', callback);
 	}
 }
+
+module.exports.listarCitas = (event, context, callback) => {
+
+
+    orderManager.getAllCitas(id)
+    .then(obj => {
+        sendResponse(200, `tenemos Lista`, callback);
+    })
+    .catch(error => {
+        sendResponse(500, 'Hubo un error al procesar el pedido', callback);
+    });
+
+  }
 
 /*
   Funciones

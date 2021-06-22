@@ -43,7 +43,7 @@ module.exports.deliverOrder = id => {
 
 };
 
-module.exports.getOrders = id => {
+module.exports.getCita = id => {
 
     console.log('Conseguir ordenes fue llamada');
 
@@ -56,6 +56,21 @@ module.exports.getOrders = id => {
 
     console.log(params);
 
+
+	return dynamo
+		.get(params)
+		.promise()
+		.then(item => {
+			return item.Item;
+		});
+
+};
+
+module.exports.getAllCitas = () => {
+
+    var params = {
+        TableName : process.env.DYNAMOTABLE
+    };
 
 	return dynamo
 		.get(params)
