@@ -76,14 +76,9 @@ module.exports.getAllCitas = () => {
 
         if (err) {
             console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-            return '';
-        } else {
-            console.log("Query succeeded.");
-            data.Items.forEach(function(item) {
-                console.log(item.id);
-            });
-            return data;
-        }
+            return [];
+        } 
+        return data;
     });
 
 };
