@@ -34,17 +34,17 @@ module.exports.hacerPedido = (event, context, callback) => {
 
 module.exports.listaPedidos = (event, context, callback) => {
 
-  const orderId = event.pathParameters && event.pathParameters.orderId;
-	if (orderId !== null) {
-		orderManager.getOrders(orderId)
+  const id = event.pathParameters && event.pathParameters.id;
+	if (id !== null) {
+		orderManager.getOrders(id)
         .then(order => {
-            sendResponse(200, `El estado de la orden: ${orderId} es ${order.delivery_status}`, callback);
+            sendResponse(200, `El estado de la orden: ${id} es ${order.delivery_status}`, callback);
         })
         .catch(error => {
             sendResponse(500, 'Hubo un error al procesar el pedido', callback);
         });
 	} else {
-		sendResponse(400, 'Falta el orderId', callback);
+		sendResponse(400, 'Falta el id', callback);
 	}
 }
 

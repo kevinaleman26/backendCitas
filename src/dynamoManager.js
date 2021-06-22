@@ -43,14 +43,14 @@ module.exports.deliverOrder = orderId => {
 
 };
 
-module.exports.getOrders = orderId => {
+module.exports.getOrders = id => {
 
     console.log('Conseguir ordenes fue llamada');
 
     const params = {
 		TableName: process.env.COMPLETED_ORDER_TABLE,
 		Key: {
-			orderId
+			id
 		}
 	};
 
