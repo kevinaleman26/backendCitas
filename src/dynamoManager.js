@@ -10,7 +10,7 @@ module.exports.saveCompletedOrder = order => {
     order.delivery_status = 'READY_FOR_DELIVERY';
 
     const params = {
-        TableName: process.env.COMPLETED_ORDER_TABLE,
+        TableName: process.env.DYNAMOTABLE,
         Item: order
     };
 
@@ -23,7 +23,7 @@ module.exports.deliverOrder = id => {
     console.log('Enviar una orden fue llamada');
 
     const params = {
-        TableName: process.env.COMPLETED_ORDER_TABLE,
+        TableName: process.env.DYNAMOTABLE,
         Key: {
             id
         },
@@ -48,7 +48,7 @@ module.exports.getOrders = id => {
     console.log('Conseguir ordenes fue llamada');
 
     const params = {
-		TableName: process.env.COMPLETED_ORDER_TABLE,
+		TableName: process.env.DYNAMOTABLE,
 		Key: {
 			id
 		}
